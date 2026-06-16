@@ -58,8 +58,8 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
   /* ── 매우 나쁨 ── */
   if (p > 35 || airLevel === 'veryBad') {
     return {
-      heroUrl: '/img/card09.png',
-      outfitUrl: '/img/card09.png',
+      heroUrl: '/img/card09.jpg',
+      outfitUrl: '/img/card09.jpg',
       acc1Url: '',
       acc2Url: '',
       backdropGradient: 'linear-gradient(148deg, #EDEAE6 0%, #DEDAD4 55%, #CECAC2 100%)',
@@ -126,8 +126,8 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
 
   /* ── 좋음 — 맑고 청량한 날 ── */
   return {
-    heroUrl: '/img/card08.png',
-    outfitUrl: '/img/card08.png',
+    heroUrl: '/img/card02.png',
+    outfitUrl: '/img/card02.png',
     acc1Url: '',
     acc2Url: '',
     backdropGradient: 'linear-gradient(148deg, #FBF8F2 0%, #F5EBD8 55%, #EDD9B8 100%)',
@@ -204,13 +204,14 @@ function AirIcon() {
 const ScrollRoot = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  /* Use dvh so content fills the visible area even when browser toolbar animates */
+  height: 100dvh;
+  height: 100svh;
+  height: 100vh; /* legacy fallback */
   overflow-y: auto;
   background: transparent;
   scroll-behavior: smooth;
   padding-top: 65px; /* Safely pushes the text right under the nav row */
-  padding-bottom: 90px; /* Safely shields items from drowning behind the bottom navigation bar */
 
   /* Hide scrollbar for clean editorial feel */
   scrollbar-width: none;
@@ -223,19 +224,25 @@ const TopHeader = styled.header`
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%; /* Spans 100% of the maximum allowed parent container width */
-  max-width: 430px; /* Perfectly snaps edge-to-edge with the 430px app container */
+  width: 100%;
+  /* Clamp to the app's max-width but never exceed the actual screen width */
+  max-width: min(430px, 100vw);
   height: 60px;
   z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px; /* Perfectly balances the internal text and icon padding to prevent inner crowding */
+  padding: 0 20px;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  /* Small phone (iPhone SE / Galaxy A13): tighten horizontal padding */
+  @media (max-width: 375px) {
+    padding: 0 14px;
+  }
 `;
 
 const HeaderLeft = styled.div`
@@ -356,22 +363,34 @@ const MoodboardCard = styled.div`
   position: relative;
   z-index: 10;
   width: 90%;
-  max-width: 343px; /* Forces identical width synchronization with the lower content panel */
+  max-width: 343px;
   aspect-ratio: 3 / 4;
   border-radius: 24px;
   margin: 24px auto;
   overflow: hidden;
   display: block;
-  background: #EBE6FF; /* Fallback tone that perfectly matches your lavender style asset */
+  background: #EBE6FF;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
   animation: ${fadeUp} 0.65s 0.1s ease both;
   flex-shrink: 0;
+
+  /* Compact height for short-screen phones (iPhone SE 667px, Galaxy A13 720px) */
+  @media (max-height: 720px) {
+    margin: 14px auto;
+    max-width: 300px;
+  }
+
+  /* Very small widths — ensure card never overflows horizontally */
+  @media (max-width: 375px) {
+    width: 86%;
+    margin: 12px auto;
+  }
 `;
 
 const ForegroundImg = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the sunset beach image fills the layout card flawlessly without distortion */
+  object-fit: fill; /* Extends the background canvas flawlessly to the absolute left and right borders */
   display: block;
 `;
 
@@ -392,6 +411,17 @@ const SuggestionsPanel = styled.div`
   box-shadow: 0 8px 32px rgba(45,49,66,0.06);
   animation: ${fadeUp} 0.7s 0.15s ease both;
   flex-shrink: 0;
+
+  /* Compact layout on small/short screens */
+  @media (max-height: 720px) {
+    padding: 14px 16px;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 375px) {
+    width: 86%;
+    padding: 16px 12px;
+  }
 `;
 
 const PanelHeading = styled.div`
@@ -436,6 +466,12 @@ const BadgeIconRing = styled.div`
   &:hover {
     transform: translateY(-3px);
     background: rgba(45,49,66,0.1);
+  }
+
+  /* Shrink icon rings on very small phones */
+  @media (max-width: 375px) {
+    width: 42px;
+    height: 42px;
   }
 `;
 

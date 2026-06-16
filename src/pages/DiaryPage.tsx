@@ -13,14 +13,11 @@ import { PhotoCardModal } from '../components/diary/PhotoCardModal';
 
 const PageWrapper = styled.div`
   min-height: 100vh;
-  min-height: -webkit-fill-available;
   background-image: url('/img/diary_bg.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* Ensures the high-end fabric grain stays steady during scroll */
   position: relative;
-  padding-bottom: 90px;
-  overflow-y: auto;
 `;
 
 const ContentZIndex = styled.div`
@@ -42,7 +39,7 @@ const Title = styled.h2`
 
 const SubText = styled.p`
   font-size: 14px;
-  color: #4A3525; /* High-end, premium deep brown color for perfect contrast */
+  color: #3A3F58; /* Premium, high-contrast deep charcoal tone */
   font-weight: 500; /* Medium thickness for robust readability */
   letter-spacing: -0.2px;
   -webkit-font-smoothing: antialiased;
@@ -140,7 +137,7 @@ const SaveBtn = styled.button`
   border-radius: 30px; /* Clean premium rounded pill shape */
   
   /* Typography Contrast Rule */
-  color: #4A3525 !important; /* Matching deep brown typography token */
+  color: #2D3142 !important; /* Strict deep charcoal text color for perfect readability */
   font-weight: 700 !important;
   letter-spacing: -0.3px;
   font-size: 16px;

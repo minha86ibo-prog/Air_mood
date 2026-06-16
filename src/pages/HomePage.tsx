@@ -50,16 +50,16 @@ const ActionLabel = styled.span`
    Page container — generous warm whitespace
 ───────────────────────────────────────────── */
 const PageWrapper = styled.div<{ $bgUrl: string }>`
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  /* dvh: dynamic viewport height — tracks toolbar show/hide on mobile */
+  min-height: 100dvh;
+  min-height: 100svh;
+  min-height: 100vh; /* legacy fallback */
   background-image: url(${props => props.$bgUrl});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   position: relative;
-  padding-bottom: 90px;
-  overflow-y: auto;
 `;
 
 const ContentZIndex = styled.div`

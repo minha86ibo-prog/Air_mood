@@ -20,12 +20,21 @@ import styled from 'styled-components';
 const AppContainer = styled.div`
   width: 100%;
   max-width: 430px; /* Mobile View Max Width */
-  height: 100%;
+  /* dvh cascades: browser picks the last supported value */
+  height: 100dvh;
+  height: 100svh;
+  height: 100vh; /* legacy */
   position: relative;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  /* On very small screens (SE, Galaxy A series), fill 100% width */
+  @media (max-width: 390px) {
+    max-width: 100%;
+    box-shadow: none;
+  }
 `;
 
 export default function App() {

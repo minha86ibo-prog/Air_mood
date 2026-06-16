@@ -6,14 +6,13 @@ import { AIR_LEVELS } from '../../constants/airLevels';
 const PolaroidCard = styled.div`
   flex: 0 0 280px;
   aspect-ratio: 3 / 4;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 24px;
-  padding: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  background: #FFFFFF;
+  border: 8px solid #FFFFFF;
+  border-bottom-width: 32px;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
   scroll-snap-align: center;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   white-space: normal;
@@ -120,6 +119,7 @@ export const HistoryCard = React.forwardRef<HTMLDivElement, { entry: DiaryEntry 
 
       <BottomArea>
         <span style={{ fontSize: '11px' }}>{entry.outdoor ? '외출 🚶' : '방콕 🏠'}</span>
+        <span style={{ fontSize: '11px' }}>컨디션 {entry.condition}%</span>
       </BottomArea>
     </PolaroidCard>
   );

@@ -7,11 +7,17 @@ const NavWrapper = styled.nav`
   bottom: 0;
   display: flex;
   justify-content: space-around;
-  padding: 16px 0 max(16px, env(safe-area-inset-bottom));
+  /* Top padding fixed; bottom grows to swallow home indicator on iPhone/Android */
+  padding: 12px 0 max(20px, env(safe-area-inset-bottom, 20px));
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-top: 1px solid #E6E2D8;
   z-index: 999;
+  /* Prevent accidental horizontal scroll on tiny screens */
+  width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
 `;
 
 const NavItem = styled.button<{ $active: boolean }>`

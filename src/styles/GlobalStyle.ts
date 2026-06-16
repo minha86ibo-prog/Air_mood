@@ -15,7 +15,17 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
-  html, body {
+  html {
+    /* dvh: dynamic viewport height — shrinks when mobile browser toolbar shows/hides.
+       Falls back: 100svh → 100vh for older browsers. */
+    height: 100dvh;
+    height: 100svh; /* safe fallback — static, excludes toolbars */
+    height: 100vh;  /* last-resort legacy fallback */
+    width: 100%;
+    overflow: hidden;
+  }
+
+  body {
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -30,6 +40,10 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     user-select: none;
+    /* Protect content from notch/home-indicator on viewport-fit=cover */
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 
   @keyframes gentleGlow {
@@ -43,7 +57,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   #root {
-    height: 100%;
+    /* Use dvh so the app shell fills exactly the visible viewport
+       including dynamic toolbar changes on iOS/Android */
+    height: 100dvh;
+    height: 100svh;
+    height: 100vh; /* legacy fallback */
     display: flex;
     justify-content: center;
     align-items: stretch;

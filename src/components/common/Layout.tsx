@@ -7,7 +7,10 @@ import { useAppContext } from '../../context/AppContext';
 const LayoutWrapper = styled.div<{ $airLevel: string; $isLoading: boolean }>`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  /* dvh fills the visible viewport; tracks mobile browser toolbar movement */
+  height: 100dvh;
+  height: 100svh;
+  height: 100vh; /* legacy fallback */
   width: 100%;
   transition: background 1s ease, background-image 1s ease;
   background: ${({ $airLevel, $isLoading }) => {

@@ -78,10 +78,10 @@ const CapsuleText = styled.span`
   font-family: 'Outfit', sans-serif;
   font-size: 13px;
   font-weight: 600;
-  color: #4A3525;
+  color: #FFFFFF;
   letter-spacing: -0.2px;
   text-align: center;
-  text-shadow: none;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 `;
 
 const OceanPhotoContainer = styled.div`
@@ -115,7 +115,7 @@ const QuoteTrack = styled.div`
 const QuoteText = styled.div`
   font-family: 'Outfit', sans-serif;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: #FFFFFF;
   line-height: 1.4;
   letter-spacing: -0.2px;
@@ -148,10 +148,10 @@ const GlassBadgeRow = styled.div`
 const GlassBadge = styled.div`
   font-family: 'Outfit', sans-serif;
   font-size: 13px;
-  color: #4A3525;
+  color: #FFFFFF;
   font-weight: 600;
   letter-spacing: -0.2px;
-  text-shadow: none;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 `;
 
 const ActionRow = styled.div`
