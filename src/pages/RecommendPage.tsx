@@ -47,7 +47,7 @@ interface OutfitCluster {
 
 function getWeatherIcon(airLevel: string) {
   if (airLevel === 'veryBad') return '🌫️';
-  if (airLevel === 'bad')     return '☁️';
+  if (airLevel === 'bad') return '☁️';
   if (airLevel === 'moderate') return '🌤️';
   return '☀️';
 }
@@ -58,10 +58,10 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
   /* ── 매우 나쁨 ── */
   if (p > 35 || airLevel === 'veryBad') {
     return {
-      heroUrl: '/img/card03.jpg',
-      outfitUrl: '/img/card03.jpg',
-      acc1Url:   '',
-      acc2Url:   '',
+      heroUrl: '/img/card09.jpg',
+      outfitUrl: '/img/card09.jpg',
+      acc1Url: '',
+      acc2Url: '',
       backdropGradient: 'linear-gradient(148deg, #EDEAE6 0%, #DEDAD4 55%, #CECAC2 100%)',
       altText: '회색 코트 플랫레이 — 고농도 미세먼지 대응 룩',
       emotionalMsg: '오늘은 실내에서 쾌적하게 지내요.',
@@ -70,8 +70,8 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
       accentColor: 'rgba(140,140,160,0.9)',
       badges: [
         { icon: <IndoorIcon />, label: '실내 활동' },
-        { icon: <MaskIcon />,   label: 'KF94 필수' },
-        { icon: <AirIcon />,   label: '공기청정기' },
+        { icon: <MaskIcon />, label: 'KF94 필수' },
+        { icon: <AirIcon />, label: '공기청정기' },
       ],
       showMaskAlert: true,
       airEmoji: '🌫️',
@@ -83,8 +83,8 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
     return {
       heroUrl: '/img/card03.jpg',
       outfitUrl: '/img/card03.jpg',
-      acc1Url:   '',
-      acc2Url:   '',
+      acc1Url: '',
+      acc2Url: '',
       backdropGradient: 'linear-gradient(148deg, #EDF4EE 0%, #D8EADA 55%, #C4DCC6 100%)',
       altText: '세이지 레이어드 아우터 플랫레이',
       emotionalMsg: '가벼운 겉옷 하나가 오늘의 방패예요.',
@@ -92,9 +92,9 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
       palette: 'sage',
       accentColor: 'rgba(120,150,130,0.9)',
       badges: [
-        { icon: <LayerIcon />,  label: '가벼운 아우터' },
-        { icon: <MaskIcon />,   label: '마스크 착용' },
-        { icon: <GlassesIcon />,label: '선글라스' },
+        { icon: <LayerIcon />, label: '가벼운 아우터' },
+        { icon: <MaskIcon />, label: '마스크 착용' },
+        { icon: <GlassesIcon />, label: '선글라스' },
       ],
       showMaskAlert: false,
       airEmoji: '☁️',
@@ -115,9 +115,9 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
       palette: 'ivory',
       accentColor: 'rgba(210,190,160,0.9)',
       badges: [
-        { icon: <LayerIcon />,  label: '가벼운 아우터' },
-        { icon: <GlassesIcon />,label: '선글라스' },
-        { icon: <MaskIcon />,   label: '마스크 선택' },
+        { icon: <LayerIcon />, label: '가벼운 아우터' },
+        { icon: <GlassesIcon />, label: '선글라스' },
+        { icon: <MaskIcon />, label: '마스크 선택' },
       ],
       showMaskAlert: false,
       airEmoji: '🌤️',
@@ -128,8 +128,8 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
   return {
     heroUrl: '/img/card02.png',
     outfitUrl: '/img/card02.png',
-    acc1Url:   '',
-    acc2Url:   '',
+    acc1Url: '',
+    acc2Url: '',
     backdropGradient: 'linear-gradient(148deg, #FBF8F2 0%, #F5EBD8 55%, #EDD9B8 100%)',
     altText: '24°C 코디 추천: 베이지 카디건, 화이트 셔츠, 뉴트럴 트라우저, 클래식 로퍼, 스트로 토트백 플랫레이',
     emotionalMsg: '오늘은 숨쉬기 딱 좋은 날이에요.',
@@ -137,9 +137,9 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
     palette: 'ivory',
     accentColor: 'rgba(255,255,255,0.85)',
     badges: [
-      { icon: <LayerIcon />,  label: '가벼운 아우터' },
-      { icon: <GlassesIcon />,label: '선글라스' },
-      { icon: <MaskIcon />,   label: '마스크 선택' },
+      { icon: <LayerIcon />, label: '가벼운 아우터' },
+      { icon: <GlassesIcon />, label: '선글라스' },
+      { icon: <MaskIcon />, label: '마스크 선택' },
     ],
     showMaskAlert: false,
     airEmoji: '☀️',
@@ -152,9 +152,9 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
 function LayerIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-      <path d="M2 17l10 5 10-5"/>
-      <path d="M2 12l10 5 10-5"/>
+      <path d="M12 2L2 7l10 5 10-5-10-5z" />
+      <path d="M2 17l10 5 10-5" />
+      <path d="M2 12l10 5 10-5" />
     </svg>
   );
 }
@@ -162,10 +162,10 @@ function LayerIcon() {
 function GlassesIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="6"  cy="15" r="4"/>
-      <circle cx="18" cy="15" r="4"/>
-      <path d="M14 15a2 2 0 00-4 0"/>
-      <path d="M2.5 13L5 7c.7-1.4 1.4-2 4-2h6c2.6 0 3.3.6 4 2l2.5 6"/>
+      <circle cx="6" cy="15" r="4" />
+      <circle cx="18" cy="15" r="4" />
+      <path d="M14 15a2 2 0 00-4 0" />
+      <path d="M2.5 13L5 7c.7-1.4 1.4-2 4-2h6c2.6 0 3.3.6 4 2l2.5 6" />
     </svg>
   );
 }
@@ -173,8 +173,8 @@ function GlassesIcon() {
 function MaskIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="7" width="18" height="10" rx="3"/>
-      <path d="M3 12h18M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2"/>
+      <rect x="3" y="7" width="18" height="10" rx="3" />
+      <path d="M3 12h18M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2" />
     </svg>
   );
 }
@@ -182,8 +182,8 @@ function MaskIcon() {
 function IndoorIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-      <polyline points="9 22 9 12 15 12 15 22"/>
+      <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
     </svg>
   );
 }
@@ -191,7 +191,7 @@ function IndoorIcon() {
 function AirIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/>
+      <path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2" />
     </svg>
   );
 }

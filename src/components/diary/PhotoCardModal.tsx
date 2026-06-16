@@ -13,17 +13,12 @@ interface PhotoCardModalProps {
   mood?: string;
 }
 
-function getBackdropGradient(airLevel: string) {
-  if (airLevel === 'veryBad') return 'linear-gradient(148deg, #EDEAE6 0%, #DEDAD4 55%, #CECAC2 100%)';
-  if (airLevel === 'bad') return 'linear-gradient(148deg, #EDF4EE 0%, #D8EADA 55%, #C4DCC6 100%)';
-  if (airLevel === 'moderate') return 'linear-gradient(148deg, #FAF6EE 0%, #F0E8D4 55%, #E4D5B4 100%)';
-  return 'linear-gradient(148deg, #FBF8F2 0%, #F5EBD8 55%, #EDD9B8 100%)';
-}
-
-const Overlay = styled.div<{ $gradient: string }>`
+const Overlay = styled.div`
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: ${props => props.$gradient};
+  background-image: url('https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?auto=format&fit=crop&w=1200&q=80');
+  background-size: cover;
+  background-position: center;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -49,19 +44,18 @@ const CardContainer = styled.div`
   width: 90%;
   max-width: 360px;
   aspect-ratio: 3 / 4;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 28px;
-  box-shadow: 0 12px 40px 0 rgba(142, 168, 189, 0.15);
-  padding: 32px 24px;
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.15);
+  padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  color: #2D3142;
   margin-bottom: 24px;
   animation: softFadeIn 0.5s ease;
 `;
@@ -75,76 +69,89 @@ const TopSection = styled.div`
 `;
 
 const CapsuleRow = styled.div`
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 24px;
-  padding: 8px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 4px 12px rgba(142, 168, 189, 0.1);
 `;
 
 const CapsuleText = styled.span`
   font-family: 'Outfit', sans-serif;
   font-size: 13px;
   font-weight: 600;
-  color: #2D3142;
+  color: #FFFFFF;
   letter-spacing: -0.2px;
   text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 `;
 
-const MiddleQuoteBox = styled.div`
+const OceanPhotoContainer = styled.div`
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  padding: 0 16px;
+  border-radius: 16px;
+  margin: 16px auto;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+`;
+
+const OceanImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+`;
+
+const QuoteTrack = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  padding: 12px 16px;
+  box-sizing: border-box;
 `;
 
 const QuoteText = styled.div`
   font-family: 'Outfit', sans-serif;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
-  color: #2D3142;
-  line-height: 1.6;
+  color: #FFFFFF;
+  line-height: 1.4;
   letter-spacing: -0.2px;
-  text-align: center;
+  text-align: left;
   white-space: pre-wrap;
 `;
 
 const BottomSection = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  align-items: flex-start;
+  gap: 8px;
   width: 100%;
 `;
 
 const MoodEmoji = styled.div`
-  font-size: 32px;
-  filter: drop-shadow(0 4px 8px rgba(142, 168, 189, 0.2));
+  font-size: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  margin-bottom: 4px;
 `;
 
 const GlassBadgeRow = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: 100%;
 `;
 
 const GlassBadge = styled.div`
-  background: rgba(45, 49, 66, 0.05);
-  border: 1px solid rgba(45, 49, 66, 0.1);
-  border-radius: 20px;
-  padding: 6px 14px;
   font-family: 'Outfit', sans-serif;
-  font-size: 12px;
-  color: #2D3142;
+  font-size: 13px;
+  color: #FFFFFF;
   font-weight: 600;
   letter-spacing: -0.2px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 `;
 
 const ActionRow = styled.div`
@@ -207,8 +214,6 @@ export function PhotoCardModal({ isOpen, onClose, airLevel, region, isOuting, co
 
   if (!isOpen) return null;
   
-  const backdropGradient = getBackdropGradient(airLevel);
-
   let conditionText = '컨디션 보통 🙂';
   if (condition > 66) conditionText = '컨디션 좋음 ✨';
   else if (condition < 33) conditionText = '컨디션 저조 💤';
@@ -221,21 +226,24 @@ export function PhotoCardModal({ isOpen, onClose, airLevel, region, isOuting, co
   }
 
   return (
-    <Overlay $gradient={backdropGradient} onClick={onClose}>
+    <Overlay onClick={onClose}>
       <ModalContentWrapper onClick={e => e.stopPropagation()}>
         <CardContainer ref={cardRef}>
           <TopSection>
             <CapsuleRow>
               <CapsuleText>{airQuote}</CapsuleText>
             </CapsuleRow>
-            {mood && <MoodEmoji>{mood}</MoodEmoji>}
           </TopSection>
           
-          <MiddleQuoteBox>
-            <QuoteText>{memo || "산들바람처럼 가볍게 입어요."}</QuoteText>
-          </MiddleQuoteBox>
+          <OceanPhotoContainer>
+            <OceanImage src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Ocean Sunset" />
+            <QuoteTrack>
+              <QuoteText>{memo || "날씨가 좋아서 기분이 좋아"}</QuoteText>
+            </QuoteTrack>
+          </OceanPhotoContainer>
           
           <BottomSection>
+            {mood && <MoodEmoji>{mood}</MoodEmoji>}
             <GlassBadgeRow>
               <GlassBadge>{isOuting ? '오늘 외출했어요 🌿' : '집에서 쉬었어요 🏠'}</GlassBadge>
               <GlassBadge>{conditionText}</GlassBadge>
