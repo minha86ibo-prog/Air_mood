@@ -58,8 +58,8 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
   /* ── 매우 나쁨 ── */
   if (p > 35 || airLevel === 'veryBad') {
     return {
-      heroUrl: '/img/card09.jpg',
-      outfitUrl: '/img/card09.jpg',
+      heroUrl: '/img/card09.png',
+      outfitUrl: '/img/card09.png',
       acc1Url: '',
       acc2Url: '',
       backdropGradient: 'linear-gradient(148deg, #EDEAE6 0%, #DEDAD4 55%, #CECAC2 100%)',
@@ -104,8 +104,8 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
   /* ── 보통 ── */
   if (airLevel === 'moderate') {
     return {
-      heroUrl: '/img/card05.png',
-      outfitUrl: '/img/card05.png',
+      heroUrl: '/img/card.png',
+      outfitUrl: '/img/card.png',
       acc1Url: '',
       acc2Url: '',
       backdropGradient: 'linear-gradient(148deg, #FAF6EE 0%, #F0E8D4 55%, #E4D5B4 100%)',
