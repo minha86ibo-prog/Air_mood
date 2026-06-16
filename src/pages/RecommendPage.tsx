@@ -104,8 +104,8 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
   /* ── 보통 ── */
   if (airLevel === 'moderate') {
     return {
-      heroUrl: '/img/card.png',
-      outfitUrl: '/img/card.png',
+      heroUrl: '/img/card05.png',
+      outfitUrl: '/img/card05.png',
       acc1Url: '',
       acc2Url: '',
       backdropGradient: 'linear-gradient(148deg, #FAF6EE 0%, #F0E8D4 55%, #E4D5B4 100%)',
@@ -126,8 +126,8 @@ function getOutfitCluster(airLevel: string, pm25: number | null): OutfitCluster 
 
   /* ── 좋음 — 맑고 청량한 날 ── */
   return {
-    heroUrl: '/img/card02.png',
-    outfitUrl: '/img/card02.png',
+    heroUrl: '/img/card08.png',
+    outfitUrl: '/img/card08.png',
     acc1Url: '',
     acc2Url: '',
     backdropGradient: 'linear-gradient(148deg, #FBF8F2 0%, #F5EBD8 55%, #EDD9B8 100%)',

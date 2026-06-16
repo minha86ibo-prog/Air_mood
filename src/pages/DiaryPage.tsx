@@ -39,7 +39,7 @@ const Title = styled.h2`
 
 const SubText = styled.p`
   font-size: 14px;
-  color: #3A3F58; /* Premium, high-contrast deep charcoal tone */
+  color: #4A3525; /* High-end, premium deep brown color for perfect contrast */
   font-weight: 500; /* Medium thickness for robust readability */
   letter-spacing: -0.2px;
   -webkit-font-smoothing: antialiased;
@@ -137,7 +137,7 @@ const SaveBtn = styled.button`
   border-radius: 30px; /* Clean premium rounded pill shape */
   
   /* Typography Contrast Rule */
-  color: #2D3142 !important; /* Strict deep charcoal text color for perfect readability */
+  color: #4A3525 !important; /* Matching deep brown typography token */
   font-weight: 700 !important;
   letter-spacing: -0.3px;
   font-size: 16px;

@@ -9,21 +9,11 @@ import html2canvas from 'html2canvas';
 
 const PageWrapper = styled.div`
   min-height: 100vh;
-  background-image: url('https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?auto=format&fit=crop&w=1200&q=80');
+  background-image: url('/img/diary_bg.jpg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   background-attachment: fixed;
   position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(to bottom, rgba(255,192,203,0.1) 0%, rgba(255,192,203,0.3) 100%);
-    z-index: 0;
-    pointer-events: none;
-  }
 `;
 
 const ContentZIndex = styled.div`
