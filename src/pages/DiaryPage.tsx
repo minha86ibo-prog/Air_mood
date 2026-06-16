@@ -11,22 +11,10 @@ import { getTodayKey } from '../utils/dateUtils';
 import type { DiaryEntry } from '../types/diary.types';
 import { PhotoCardModal } from '../components/diary/PhotoCardModal';
 
-const PageWrapper = styled.div<{ $bgUrl: string }>`
+const PageWrapper = styled.div`
   min-height: 100vh;
-  background-image: url(${props => props.$bgUrl});
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background: linear-gradient(180deg, #E2EFF9 0%, #F3F8FC 45%, #FFFFFF 100%);
   position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
-    z-index: 0;
-    pointer-events: none;
-  }
 `;
 
 const ContentZIndex = styled.div`
@@ -42,68 +30,72 @@ const Title = styled.h2`
   font-size: 20px;
   font-weight: 700 !important;
   margin-bottom: 8px;
-  color: #FFFFFF !important;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  color: #2D3142 !important;
+  text-align: center;
 `;
 
 const SubText = styled.p`
   font-size: 14px;
-  color: #FFFFFF;
+  color: #2D3142;
   margin-bottom: 16px;
   line-height: 1.5;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  text-align: center;
 `;
 
 const SummaryBadge = styled.div`
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
-  color: #FFFFFF;
-  padding: 6px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #2D3142;
+  padding: 6px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
-  margin-bottom: 24px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 0 auto 24px;
+  box-shadow: 0 2px 8px rgba(142, 168, 189, 0.1);
+  width: fit-content;
 `;
 
 const FormContainer = styled.div`
   background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 32px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 28px;
+  box-shadow: 0 10px 35px rgba(142, 168, 189, 0.12);
+  width: 92%;
+  max-width: 380px;
+  margin: 16px auto 24px;
   padding: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-  margin-bottom: 24px;
+  box-sizing: border-box;
 `;
 
 const SaveBtn = styled.button`
-  width: 100%;
+  width: 90%;
+  margin: 8px auto 24px;
+  display: block;
   padding: 18px;
-  background-color: rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(10px);
+  background-color: #2D3142 !important;
   color: #FFFFFF !important;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: none;
   border-radius: ${({ theme }) => theme.radius.lg};
   font-size: 16px;
   font-weight: 700 !important;
-  margin-top: 8px;
-  margin-bottom: 24px;
   transition: all ${({ theme }) => theme.transitions.bounce};
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(45, 49, 66, 0.2);
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    background: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 25px rgba(45, 49, 66, 0.3);
+    background: #1A1D28 !important;
   }
 
   &:disabled {
-    background: rgba(255, 255, 255, 0.05) !important;
-    color: rgba(255, 255, 255, 0.5) !important;
-    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(45, 49, 66, 0.1) !important;
+    color: rgba(45, 49, 66, 0.4) !important;
     transform: none;
     box-shadow: none;
     cursor: not-allowed;
@@ -137,15 +129,8 @@ export function DiaryPage() {
     setIsCardModalOpen(true);
   };
 
-  let bgUrl = 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1200&q=80';
-  if (state.airLevel === 'moderate') {
-    bgUrl = 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1200&q=80';
-  } else if (state.airLevel === 'bad' || state.airLevel === 'veryBad') {
-    bgUrl = 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80';
-  }
-
   return (
-    <PageWrapper $bgUrl={bgUrl}>
+    <PageWrapper>
       <ContentZIndex>
         <Header title="AIR DIARY" showBack />
         <Container>

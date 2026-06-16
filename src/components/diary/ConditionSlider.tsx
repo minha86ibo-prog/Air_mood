@@ -16,17 +16,17 @@ const LabelWrap = styled.div`
 const Label = styled.label`
   font-size: 15px;
   font-weight: 700 !important;
-  color: #FFFFFF !important;
+  color: #2D3142 !important;
   letter-spacing: -0.5px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  text-shadow: none;
 `;
 
 const Value = styled.span`
   font-family: ${({ theme }) => theme.fonts.en};
   font-size: 14px;
   font-weight: 500;
-  color: #FFFFFF;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  color: #2D3142;
+  text-shadow: none;
 `;
 
 const SliderWrap = styled.div`

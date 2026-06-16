@@ -13,9 +13,9 @@ const Container = styled.div`
 const Label = styled.span`
   font-size: 15px;
   font-weight: 700 !important;
-  color: #FFFFFF !important;
+  color: #2D3142 !important;
   letter-spacing: -0.5px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  text-shadow: none;
 `;
 
 const ToggleBtn = styled.button<{ $active: boolean }>`

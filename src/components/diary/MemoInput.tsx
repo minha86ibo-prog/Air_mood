@@ -11,39 +11,39 @@ const Label = styled.label`
   font-size: 15px;
   font-weight: 700 !important;
   margin-bottom: 12px;
-  color: #FFFFFF !important;
+  color: #2D3142 !important;
   letter-spacing: -0.5px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  text-shadow: none;
 `;
 
 const TextArea = styled.textarea`
   width: 100%;
   min-height: 140px;
-  background-color: rgba(255, 255, 255, 0.4);
-  background-image: linear-gradient(transparent, transparent 27px, rgba(255, 255, 255, 0.25) 27px);
+  background-color: rgba(255, 255, 255, 0.6);
+  background-image: linear-gradient(transparent, transparent 27px, rgba(255, 255, 255, 0.4) 27px);
   background-size: 100% 28px;
   background-attachment: local;
   background-position: 0 14px;
   line-height: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(45, 49, 66, 0.15);
   border-radius: ${({ theme }) => theme.radius.lg};
   padding: 14px 16px;
-  color: #FFFFFF;
+  color: #2D3142;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   resize: none;
   transition: all ${({ theme }) => theme.transitions.fast};
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.02);
 
   &::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(45, 49, 66, 0.5);
   }
 
   &:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.7);
-    background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+    border-color: rgba(45, 49, 66, 0.3);
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 0 3px rgba(45, 49, 66, 0.1);
   }
 `;
 

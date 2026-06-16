@@ -13,13 +13,17 @@ interface PhotoCardModalProps {
   mood?: string;
 }
 
-const Overlay = styled.div<{ $bgUrl: string }>`
+function getBackdropGradient(airLevel: string) {
+  if (airLevel === 'veryBad') return 'linear-gradient(148deg, #EDEAE6 0%, #DEDAD4 55%, #CECAC2 100%)';
+  if (airLevel === 'bad') return 'linear-gradient(148deg, #EDF4EE 0%, #D8EADA 55%, #C4DCC6 100%)';
+  if (airLevel === 'moderate') return 'linear-gradient(148deg, #FAF6EE 0%, #F0E8D4 55%, #E4D5B4 100%)';
+  return 'linear-gradient(148deg, #FBF8F2 0%, #F5EBD8 55%, #EDD9B8 100%)';
+}
+
+const Overlay = styled.div<{ $gradient: string }>`
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url(${props => props.$bgUrl});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: ${props => props.$gradient};
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -29,13 +33,6 @@ const Overlay = styled.div<{ $bgUrl: string }>`
   align-items: center;
   z-index: 9999;
   padding: 24px;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.25);
-  }
 `;
 
 const ModalContentWrapper = styled.div`
@@ -49,132 +46,106 @@ const ModalContentWrapper = styled.div`
 `;
 
 const CardContainer = styled.div`
-  width: 100%;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border-radius: 32px;
-  padding: 24px;
+  width: 90%;
+  max-width: 360px;
+  aspect-ratio: 3 / 4;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 28px;
+  box-shadow: 0 12px 40px 0 rgba(142, 168, 189, 0.15);
+  padding: 32px 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  color: #fff;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  color: #2D3142;
   margin-bottom: 24px;
   animation: softFadeIn 0.5s ease;
 `;
 
+const TopSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+`;
+
 const CapsuleRow = styled.div`
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.6);
   border-radius: 24px;
-  padding: 14px 20px;
+  padding: 8px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(142, 168, 189, 0.1);
 `;
 
 const CapsuleText = styled.span`
   font-family: 'Outfit', sans-serif;
   font-size: 13px;
-  font-weight: 500;
-  color: #fff;
+  font-weight: 600;
+  color: #2D3142;
   letter-spacing: -0.2px;
   text-align: center;
 `;
 
-const SecondaryPhotoBox = styled.div`
+const MiddleQuoteBox = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  aspect-ratio: 1;
-  border-radius: 20px;
-  background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0 16px;
 `;
 
-const PhotoOverlay = styled.div`
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 60%;
-  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
-  pointer-events: none;
-`;
-
-const MemoText = styled.div`
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  color: #fff;
+const QuoteText = styled.div`
   font-family: 'Outfit', sans-serif;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 1.5;
-  letter-spacing: -0.3px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+  font-weight: 600;
+  color: #2D3142;
+  line-height: 1.6;
+  letter-spacing: -0.2px;
+  text-align: center;
   white-space: pre-wrap;
 `;
 
-const BottomMetaRow = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-`;
-
-const MetaLeft = styled.div`
+const BottomSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
 `;
 
 const MoodEmoji = styled.div`
-  font-size: 28px;
-  margin-bottom: 4px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  font-size: 32px;
+  filter: drop-shadow(0 4px 8px rgba(142, 168, 189, 0.2));
 `;
 
 const GlassBadgeRow = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
 `;
 
 const GlassBadge = styled.div`
+  background: rgba(45, 49, 66, 0.05);
+  border: 1px solid rgba(45, 49, 66, 0.1);
+  border-radius: 20px;
+  padding: 6px 14px;
   font-family: 'Outfit', sans-serif;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 400;
+  font-size: 12px;
+  color: #2D3142;
+  font-weight: 600;
   letter-spacing: -0.2px;
 `;
-
-const ActionIconButton = styled.button`
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.6);
-  }
-`;
-
-const HeartIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-);
 
 const ActionRow = styled.div`
   display: flex;
@@ -185,17 +156,17 @@ const ActionRow = styled.div`
 const ActionBtn = styled.button<{ $primary?: boolean }>`
   flex: 1;
   padding: 16px 0;
-  background: ${props => props.$primary ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.15)'};
-  color: ${props => props.$primary ? '#333333' : '#ffffff'};
+  background: ${props => props.$primary ? '#2D3142' : 'rgba(255, 255, 255, 0.6)'};
+  color: ${props => props.$primary ? '#ffffff' : '#2D3142'};
   backdrop-filter: ${props => props.$primary ? 'none' : 'blur(10px)'};
-  border: 1px solid ${props => props.$primary ? 'transparent' : 'rgba(255, 255, 255, 0.3)'};
+  border: 1px solid ${props => props.$primary ? 'transparent' : 'rgba(255, 255, 255, 0.8)'};
   border-radius: 16px;
   font-family: 'Outfit', sans-serif;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: ${props => props.$primary ? '0 4px 12px rgba(0,0,0,0.1)' : 'none'};
+  box-shadow: ${props => props.$primary ? '0 4px 12px rgba(45,49,66,0.2)' : '0 4px 12px rgba(142,168,189,0.1)'};
 
   &:hover {
     transform: translateY(-2px);
@@ -236,12 +207,7 @@ export function PhotoCardModal({ isOpen, onClose, airLevel, region, isOuting, co
 
   if (!isOpen) return null;
   
-  let bgUrl = 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=800&q=80'; 
-  if (airLevel === 'moderate') {
-    bgUrl = 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=800&q=80';
-  } else if (airLevel === 'bad' || airLevel === 'veryBad') {
-    bgUrl = 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80'; 
-  }
+  const backdropGradient = getBackdropGradient(airLevel);
 
   let conditionText = '컨디션 보통 🙂';
   if (condition > 66) conditionText = '컨디션 좋음 ✨';
@@ -255,30 +221,26 @@ export function PhotoCardModal({ isOpen, onClose, airLevel, region, isOuting, co
   }
 
   return (
-    <Overlay $bgUrl={bgUrl} onClick={onClose}>
+    <Overlay $gradient={backdropGradient} onClick={onClose}>
       <ModalContentWrapper onClick={e => e.stopPropagation()}>
         <CardContainer ref={cardRef}>
-          <CapsuleRow>
-            <CapsuleText>{airQuote}</CapsuleText>
-          </CapsuleRow>
+          <TopSection>
+            <CapsuleRow>
+              <CapsuleText>{airQuote}</CapsuleText>
+            </CapsuleRow>
+            {mood && <MoodEmoji>{mood}</MoodEmoji>}
+          </TopSection>
           
-          <SecondaryPhotoBox>
-            <PhotoOverlay />
-            {memo && <MemoText>{memo}</MemoText>}
-          </SecondaryPhotoBox>
+          <MiddleQuoteBox>
+            <QuoteText>{memo || "산들바람처럼 가볍게 입어요."}</QuoteText>
+          </MiddleQuoteBox>
           
-          <BottomMetaRow>
-            <MetaLeft>
-              {mood && <MoodEmoji>{mood}</MoodEmoji>}
-              <GlassBadgeRow>
-                <GlassBadge>{isOuting ? '오늘 외출했어요 🌿' : '오늘은 집에서 쉬었어요 🏠'}</GlassBadge>
-                <GlassBadge>{conditionText}</GlassBadge>
-              </GlassBadgeRow>
-            </MetaLeft>
-            <ActionIconButton onClick={onClose}>
-              <HeartIcon />
-            </ActionIconButton>
-          </BottomMetaRow>
+          <BottomSection>
+            <GlassBadgeRow>
+              <GlassBadge>{isOuting ? '오늘 외출했어요 🌿' : '집에서 쉬었어요 🏠'}</GlassBadge>
+              <GlassBadge>{conditionText}</GlassBadge>
+            </GlassBadgeRow>
+          </BottomSection>
         </CardContainer>
         
         <ActionRow>
