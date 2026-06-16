@@ -13,11 +13,14 @@ import { PhotoCardModal } from '../components/diary/PhotoCardModal';
 
 const PageWrapper = styled.div`
   min-height: 100vh;
+  min-height: -webkit-fill-available;
   background-image: url('/img/diary_bg.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* Ensures the high-end fabric grain stays steady during scroll */
   position: relative;
+  padding-bottom: 90px;
+  overflow-y: auto;
 `;
 
 const ContentZIndex = styled.div`

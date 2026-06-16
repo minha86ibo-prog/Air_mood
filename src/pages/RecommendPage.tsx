@@ -204,11 +204,13 @@ function AirIcon() {
 const ScrollRoot = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   overflow-y: auto;
   background: transparent;
   scroll-behavior: smooth;
   padding-top: 65px; /* Safely pushes the text right under the nav row */
+  padding-bottom: 90px; /* Safely shields items from drowning behind the bottom navigation bar */
 
   /* Hide scrollbar for clean editorial feel */
   scrollbar-width: none;
@@ -369,7 +371,7 @@ const MoodboardCard = styled.div`
 const ForegroundImg = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: fill; /* Extends the background canvas flawlessly to the absolute left and right borders */
+  object-fit: cover; /* Ensures the sunset beach image fills the layout card flawlessly without distortion */
   display: block;
 `;
 

@@ -51,12 +51,15 @@ const ActionLabel = styled.span`
 ───────────────────────────────────────────── */
 const PageWrapper = styled.div<{ $bgUrl: string }>`
   min-height: 100vh;
+  min-height: -webkit-fill-available;
   background-image: url(${props => props.$bgUrl});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   position: relative;
+  padding-bottom: 90px;
+  overflow-y: auto;
 `;
 
 const ContentZIndex = styled.div`

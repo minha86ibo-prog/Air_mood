@@ -37,7 +37,7 @@ const LeftWrap = styled.div`
 `;
 
 const IconWrap = styled.div`
-  color: #FFFFFF;
+  color: #4A3525;
 `;
 
 const TextWrap = styled.div`
@@ -48,8 +48,8 @@ const TextWrap = styled.div`
 
 const Title = styled.span`
   font-size: 15px;
-  font-weight: 500;
-  color: #FFFFFF;
+  font-weight: 700;
+  color: #4A3525;
 `;
 
 const Subtitle = styled.span`
@@ -59,7 +59,7 @@ const Subtitle = styled.span`
 `;
 
 const ArrowIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A3525" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
 );
 
 const ShirtIcon = () => (

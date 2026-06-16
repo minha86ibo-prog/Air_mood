@@ -4,6 +4,8 @@ import { useAppContext } from '../../context/AppContext';
 
 const Container = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.xl};
+  max-width: 100%;
+  box-sizing: border-box;
 `;
 
 const Label = styled.label`
@@ -18,6 +20,8 @@ const Label = styled.label`
 
 const TextArea = styled.textarea`
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   min-height: 140px;
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);

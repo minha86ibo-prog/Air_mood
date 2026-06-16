@@ -236,7 +236,7 @@ export function PhotoCardModal({ isOpen, onClose, airLevel, region, isOuting, co
           </TopSection>
           
           <OceanPhotoContainer>
-            <OceanImage src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Ocean Sunset" />
+            <OceanImage src="/img/card.png" alt="Ocean Sunset" />
             <QuoteTrack>
               <QuoteText>{memo || "날씨가 좋아서 기분이 좋아"}</QuoteText>
             </QuoteTrack>

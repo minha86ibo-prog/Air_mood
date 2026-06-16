@@ -13,6 +13,8 @@ const MOODS: MoodOption[] = [
 
 const Container = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.lg};
+  max-width: 100%;
+  box-sizing: border-box;
 `;
 
 const Label = styled.label`
@@ -28,7 +30,11 @@ const Label = styled.label`
 const MoodGrid = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
+  flex-wrap: nowrap;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 4px;
 `;
 
 const MoodBtn = styled.button<{ $selected: boolean }>`
