@@ -78,10 +78,9 @@ const CapsuleText = styled.span`
   font-family: 'Outfit', sans-serif;
   font-size: 13px;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #6E5343; /* Warm Brown-toned color */
   letter-spacing: -0.2px;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 `;
 
 const OceanPhotoContainer = styled.div`
@@ -148,10 +147,9 @@ const GlassBadgeRow = styled.div`
 const GlassBadge = styled.div`
   font-family: 'Outfit', sans-serif;
   font-size: 13px;
-  color: #FFFFFF;
+  color: #6E5343; /* Warm Brown-toned color */
   font-weight: 600;
   letter-spacing: -0.2px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 `;
 
 const ActionRow = styled.div`

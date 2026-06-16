@@ -51,14 +51,13 @@ const ActionLabel = styled.span`
 ───────────────────────────────────────────── */
 const PageWrapper = styled.div<{ $bgUrl: string }>`
   /* dvh: dynamic viewport height — tracks toolbar show/hide on mobile */
-  min-height: 100dvh;
-  min-height: 100svh;
   min-height: 100vh; /* legacy fallback */
+  min-height: 100svh;
+  min-height: 100dvh;
   background-image: url(${props => props.$bgUrl});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   position: relative;
 `;
 

@@ -21,9 +21,9 @@ const AppContainer = styled.div`
   width: 100%;
   max-width: 430px; /* Mobile View Max Width */
   /* dvh cascades: browser picks the last supported value */
-  height: 100dvh;
-  height: 100svh;
   height: 100vh; /* legacy */
+  height: 100svh;
+  height: 100dvh;
   position: relative;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   display: flex;
