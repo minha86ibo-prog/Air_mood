@@ -35,9 +35,10 @@ const MoodBtn = styled.button<{ $selected: boolean }>`
   flex: 1;
   aspect-ratio: 1;
   border-radius: 50%;
-  background-color: ${({ $selected }) => 
-    $selected ? '#B88A8A !important' : 'transparent'};
-  border: none;
+  background: ${({ $selected }) => 
+    $selected ? 'rgba(255, 255, 255, 0.55) !important' : 'transparent'};
+  border: ${({ $selected }) => 
+    $selected ? '1px solid rgba(255, 255, 255, 0.4) !important' : 'none'};
   font-size: 28px;
   transition: all ${({ theme }) => theme.transitions.bounce};
   display: flex;
@@ -46,16 +47,16 @@ const MoodBtn = styled.button<{ $selected: boolean }>`
   position: relative;
   
   ${({ $selected }) => $selected && `
-    box-shadow: 
-      inset 0 0 10px rgba(0,0,0,0.1), 
-      0 4px 10px rgba(184, 138, 138, 0.4) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
     transform: scale(1.1);
   `}
 
   &:hover {
     transform: ${({ $selected }) => $selected ? 'scale(1.1)' : 'scale(1.05)'};
-    background-color: ${({ $selected }) => 
-      $selected ? '#B88A8A !important' : 'rgba(255, 255, 255, 0.1)'};
+    background: ${({ $selected }) => 
+      $selected ? 'rgba(255, 255, 255, 0.55) !important' : 'rgba(255, 255, 255, 0.1)'};
   }
 `;
 

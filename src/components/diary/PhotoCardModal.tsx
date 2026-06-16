@@ -11,14 +11,14 @@ interface PhotoCardModalProps {
   condition: number;
   memo: string;
   mood?: string;
+  customMood?: string;
+  customActivity?: string;
 }
 
 const Overlay = styled.div`
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url('https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?auto=format&fit=crop&w=1200&q=80');
-  background-size: cover;
-  background-position: center;
+  background: #F4F1EA; /* Premium clean background texturing */
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -180,7 +180,7 @@ const ActionBtn = styled.button<{ $primary?: boolean }>`
   }
 `;
 
-export function PhotoCardModal({ isOpen, onClose, airLevel, region, isOuting, condition, memo, mood }: PhotoCardModalProps) {
+export function PhotoCardModal({ isOpen, onClose, airLevel, region, isOuting, condition, memo, mood, customMood, customActivity }: PhotoCardModalProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleSaveImage = () => {
@@ -243,9 +243,9 @@ export function PhotoCardModal({ isOpen, onClose, airLevel, region, isOuting, co
           </OceanPhotoContainer>
           
           <BottomSection>
-            {mood && <MoodEmoji>{mood}</MoodEmoji>}
+            <MoodEmoji>{customMood || mood}</MoodEmoji>
             <GlassBadgeRow>
-              <GlassBadge>{isOuting ? '오늘 외출했어요 🌿' : '집에서 쉬었어요 🏠'}</GlassBadge>
+              <GlassBadge>{customActivity || (isOuting ? '오늘 외출했어요 🌿' : '집에서 쉬었어요 🏠')}</GlassBadge>
               <GlassBadge>{conditionText}</GlassBadge>
             </GlassBadgeRow>
           </BottomSection>

@@ -19,21 +19,18 @@ const Label = styled.label`
 const TextArea = styled.textarea`
   width: 100%;
   min-height: 140px;
-  background-color: rgba(255, 255, 255, 0.6);
-  background-image: linear-gradient(transparent, transparent 27px, rgba(255, 255, 255, 0.4) 27px);
-  background-size: 100% 28px;
-  background-attachment: local;
-  background-position: 0 14px;
-  line-height: 28px;
-  border: 1px solid rgba(45, 49, 66, 0.15);
-  border-radius: ${({ theme }) => theme.radius.lg};
-  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  box-shadow: none;
+  padding: 18px;
   color: #2D3142;
   font-size: 14px;
   font-weight: 500;
   resize: none;
-  transition: all ${({ theme }) => theme.transitions.fast};
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s;
 
   &::placeholder {
     color: rgba(45, 49, 66, 0.5);
@@ -41,9 +38,8 @@ const TextArea = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: rgba(45, 49, 66, 0.3);
-    background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 0 3px rgba(45, 49, 66, 0.1);
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.6);
   }
 `;
 
