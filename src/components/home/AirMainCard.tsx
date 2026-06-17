@@ -151,7 +151,10 @@ export function AirMainCard() {
   const level = state.airLevel;
   const copy = LIFESTYLE_COPY[level] || LIFESTYLE_COPY.good;
 
-  // Mocked live weather data for visual consistency
+  const currentTemp = state.airData.currentTemp !== undefined ? Math.round(state.airData.currentTemp) : 24;
+  const highTemp = state.airData.highTemp !== undefined ? Math.round(state.airData.highTemp) : 29;
+  const lowTemp = state.airData.lowTemp !== undefined ? Math.round(state.airData.lowTemp) : 18;
+
   return (
     <Card>
       <WeatherContainer>
@@ -159,8 +162,8 @@ export function AirMainCard() {
           <SunIcon />
         </WeatherIconWrap>
         <TemperatureGroup>
-          <CurrentTemp>24°C</CurrentTemp>
-          <HighLowTemp>↓ 18° / ↑ 29°</HighLowTemp>
+          <CurrentTemp>{currentTemp}°C</CurrentTemp>
+          <HighLowTemp>↓ {lowTemp}° / ↑ {highTemp}°</HighLowTemp>
         </TemperatureGroup>
       </WeatherContainer>
 

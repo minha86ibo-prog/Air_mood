@@ -19,6 +19,7 @@ import {
   parseAlarmResponse,
   fetchRealtimeAirData,
   parseRealtimeResponse,
+  fetchRealTimeWeather,
 } from '../api/airkorea';
 import {
   deriveAirLevelFromAlarms,
@@ -232,10 +233,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'SET_LOADING', payload: true });
 
     try {
-      // 병렬로 경보 데이터와 실시간 측정 데이터 호출
-      const [alarmRaw, realtimeRaw] = await Promise.all([
+      // 병렬로 경보 데이터, 실시간 측정 데이터, 날씨 데이터 호출
+      const [alarmRaw, realtimeRaw, weatherRaw] = await Promise.all([
         fetchAlarmData(sido.code).catch(() => null),
-        fetchRealtimeAirData(sido.code).catch(() => null)
+        fetchRealtimeAirData(sido.code).catch(() => null),
+        fetchRealTimeWeather(sido.lat, sido.lon).catch(() => null)
       ]);
 
       // 지역 필터 적용: alarm API가 다른 지역 경보도 함께 내려줄 수 있으므로 현재 선택된 sido.code와 일치하는 것만 사용
@@ -303,6 +305,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         measuredAt:    getNowTimeStr(),
         source:        realtimeItems.length > 0 ? 'api' : 'mock',
         estimated:     isEstimated,
+        currentTemp:   weatherRaw?.current_weather?.temperature,
+        highTemp:      weatherRaw?.daily?.temperature_2m_max?.[0],
+        lowTemp:       weatherRaw?.daily?.temperature_2m_min?.[0],
       };
 
       dispatch({ type: 'SET_AIR_DATA', payload: { airData, airLevel: finalAirLevel } });
@@ -311,7 +316,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         showToast(`🚨 ${sido.name} 미세먼지 경보 ${activeAlarms.length}건 발령 중`);
       } else {
         // 실시간 데이터가 있든 없든 폴백 데이터로 스무스하게 넘어갈 때는 동일하게 완료 메시지 노출
-        showToast(`✅ ${sido.name} 대기질 데이터 로드 완료`);
+        showToast(`✅ ${sido.name} 대기질 및 실시간 날씨 로드 완료`);
       }
     } catch (err) {
       console.warn('[AIR MOOD] API 전체 오류:', (err as Error).message);

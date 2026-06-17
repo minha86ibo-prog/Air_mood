@@ -25,12 +25,17 @@ export interface AirData {
   measuredAt: string;
   source: DataSource;
   estimated: boolean;
+  currentTemp?: number;
+  highTemp?: number;
+  lowTemp?: number;
 }
 
 export interface Sido {
   code: string;
   name: string;
   emoji: string;
+  lat: number;
+  lon: number;
 }
 
 export interface AirLevelInfo {

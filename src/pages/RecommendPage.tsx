@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useAppContext } from '../context/AppContext';
+import { SIDO_LIST } from '../constants/sidoList';
 
 /* ═══════════════════════════════════════════════════════════
    ANIMATIONS
@@ -308,17 +309,44 @@ const WeatherEmojiLarge = styled.div`
   line-height: 1;
 `;
 
-const LocationLabel = styled.div`
+const SelectWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  margin-top: 2px;
+`;
+
+const StyledSelect = styled.select`
+  appearance: none;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  padding: 2px 14px 2px 6px;
   font-family: 'Outfit', sans-serif;
   font-size: 10px;
   font-weight: 500;
-  color: rgba(45,49,66,0.6);
+  color: #4A3525;
   letter-spacing: 0.5px;
-  max-width: 80px;
+  cursor: pointer;
+  outline: none;
   text-align: right;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+
+  option {
+    color: #4A3525;
+    background: white;
+    text-align: left;
+  }
+`;
+
+const Chevron = styled.span`
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 8px;
+  color: #4A3525;
+  pointer-events: none;
 `;
 
 /* ── Emotional Message Band ── */
@@ -547,14 +575,14 @@ const BottomSpacer = styled.div`
    MAIN COMPONENT
 ═══════════════════════════════════════════════════════════ */
 export function RecommendPage() {
-  const { state } = useAppContext();
-  const { airData, airLevel, loading } = state;
-  const { region, pm25, pm10 } = airData;
+  const { state, dispatch, loadAirData } = useAppContext();
+  const { airData, airLevel, loading, selectedSido } = state;
+  const { pm25, pm10 } = airData;
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Mock temperature — in a real app this comes from a weather API
-  const currentTemp = 24;
+  // Extract temperature from the fetched weather data
+  const currentTemp = airData.currentTemp !== undefined ? Math.round(airData.currentTemp) : 24;
 
   const cluster = getOutfitCluster(airLevel, pm25);
 
@@ -563,7 +591,14 @@ export function RecommendPage() {
     scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
   }, [airLevel]);
 
-  const displayRegion = region.replace('광역시', '').replace('특별시', '').replace('특별자치시', '');
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const code = e.target.value;
+    const sido = SIDO_LIST.find(s => s.code === code);
+    if (sido) {
+      dispatch({ type: 'SET_SIDO', payload: sido });
+      loadAirData(sido);
+    }
+  };
 
   return (
     <ScrollRoot ref={scrollRef}>
@@ -582,7 +617,16 @@ export function RecommendPage() {
 
         <HeaderRight>
           <WeatherEmojiLarge>{getWeatherIcon(airLevel)}</WeatherEmojiLarge>
-          <LocationLabel>{displayRegion}</LocationLabel>
+          <SelectWrapper>
+            <StyledSelect value={selectedSido.code} onChange={handleChange} aria-label="지역 선택">
+              {SIDO_LIST.map(sido => (
+                <option key={sido.code} value={sido.code}>
+                  {sido.name.replace('광역시', '').replace('특별시', '').replace('특별자치시', '')}
+                </option>
+              ))}
+            </StyledSelect>
+            <Chevron>▾</Chevron>
+          </SelectWrapper>
         </HeaderRight>
       </TopHeader>
 

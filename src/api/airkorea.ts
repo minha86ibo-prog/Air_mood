@@ -133,3 +133,20 @@ export function parseRealtimeResponse(data: unknown): RealtimeItem[] {
   
   return Array.isArray(items) ? items : [items];
 }
+
+export interface WeatherResponse {
+  current_weather: { temperature: number };
+  daily: { temperature_2m_max: number[]; temperature_2m_min: number[] };
+}
+
+export async function fetchRealTimeWeather(lat: number, lon: number): Promise<WeatherResponse> {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FSeoul`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Weather API Error: ${res.status}`);
+    return await res.json() as WeatherResponse;
+  } catch (error) {
+    console.error('[AIR MOOD] Weather Fetch Error:', error);
+    throw error;
+  }
+}

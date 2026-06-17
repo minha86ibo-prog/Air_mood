@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAppContext } from '../../context/AppContext';
 import { getTodayString } from '../../utils/dateUtils';
+import { SIDO_LIST } from '../../constants/sidoList';
 
 const LocationSvg = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -10,27 +11,19 @@ const LocationSvg = () => (
   </svg>
 );
 
-const Bar = styled.button`
+const Bar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 8px 0 28px;
-  background: none;
-  border: none;
   width: 100%;
-  cursor: pointer;
-  text-align: left;
-  transition: opacity ${({ theme }) => theme.transitions.fast};
-
-  &:hover {
-    opacity: 0.72;
-  }
 `;
 
 const Info = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+  position: relative;
 `;
 
 const IconWrap = styled.span`
@@ -39,19 +32,39 @@ const IconWrap = styled.span`
   justify-content: center;
 `;
 
-const Name = styled.span`
+const SelectWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+const StyledSelect = styled.select`
+  appearance: none;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 4px 24px 4px 10px;
   font-size: 17px;
   font-weight: 700;
-  color: #FFFFFF;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  letter-spacing: -0.03em;
+  color: #4A3525;
+  cursor: pointer;
+  outline: none;
+  
+  option {
+    color: #4A3525;
+    background: white;
+  }
 `;
 
 const Chevron = styled.span`
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.8);
-  opacity: 0.7;
-  margin-left: -2px;
+  color: #4A3525;
+  pointer-events: none;
 `;
 
 const DateText = styled.span`
@@ -63,14 +76,29 @@ const DateText = styled.span`
 `;
 
 export function LocationBar() {
-  const { state, dispatch } = useAppContext();
+  const { state, dispatch, loadAirData } = useAppContext();
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const code = e.target.value;
+    const sido = SIDO_LIST.find(s => s.code === code);
+    if (sido) {
+      dispatch({ type: 'SET_SIDO', payload: sido });
+      loadAirData(sido);
+    }
+  };
 
   return (
-    <Bar onClick={() => dispatch({ type: 'OPEN_CITY_MODAL' })} aria-label="지역 선택하기" title="클릭하여 지역 변경">
+    <Bar>
       <Info>
         <IconWrap><LocationSvg /></IconWrap>
-        <Name>{state.airData.region}</Name>
-        <Chevron>▾</Chevron>
+        <SelectWrapper>
+          <StyledSelect value={state.selectedSido.code} onChange={handleChange} aria-label="지역 선택">
+            {SIDO_LIST.map(sido => (
+              <option key={sido.code} value={sido.code}>{sido.name}</option>
+            ))}
+          </StyledSelect>
+          <Chevron>▾</Chevron>
+        </SelectWrapper>
       </Info>
       <DateText>{getTodayString()}</DateText>
     </Bar>
